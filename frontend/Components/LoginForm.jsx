@@ -1,24 +1,67 @@
-import React from 'react';
+import { useState } from 'react';
+import axios from 'axios';
 import Input from './Subcomponents/Input';
 import Button from './Subcomponents/Button';
 
 function LoginForm(props) {
+  const [user, setUser] = useState({
+    email: '',
+    password: ''
+  });
+  const [status, setStatus] = useState({
+    type: '',
+    mensagem: ''
+  })
+  const [passwordCheck, setPasswordCheck] = useState('');
+  const handleChange = ({ target: { name, value } }) => {
+    setUser(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+  }
+  const handleSubmit = async e => {
+    e.preventDefault();
+     // const response = await axios.post('https://codigofont-chalenge-back.herokuapp.com/users', user);
+     console.log(user) 
+     await axios.post('http://localhost:3001/login', user).then((response) => {
+        console.log(response);
+        setStatus({
+          type: 'success',
+          mensagem: 'Login efetuado com sucesso'
+        })
+        setIsChecked(true)
+      }).catch((err) => {
+        if(err.response){
+          console.log(err.response)
+          setStatus({
+            type: 'error',
+            mensagem: err.response.data.message
+          })
+        } else {
+          setStatus({
+            type: 'error',
+            mensagem: 'Tente novamente mais tarde'
+          })
+        }
+      });
+  }
   return (
     <div className="d-flex justify-content-center">
     <div className="form-container bg-light">
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label ">Login</label>
           <Input 
           type='name'
-          name='nick'
+          name='email'
           placeholder="Digite Seu Nome"
-          onChange= { ({ target: { value } }) => console.log(value) }/>
+          onChange= { handleChange }/>
           <Input 
           type='password'
-          name='nick'
+          name='password'
           placeholder="Digite Sua Senha"
-          onChange= { ({ target: { value } }) => console.log(value) }/>
+          onChange= { handleChange }/>
+          <span>{status.mensagem}</span>
         </div>
         <Button type="submit" value="Entrar" className="btn btn-primary col-12"/>
       </form>
