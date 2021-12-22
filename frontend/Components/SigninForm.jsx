@@ -38,6 +38,7 @@ function SigninForm(props) {
           type: 'success',
           mensagem: 'Novo usuario cadastrado'
         })
+        setIsChecked(true)
       }).catch((err) => {
         if(err.response){
           setStatus({

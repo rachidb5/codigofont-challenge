@@ -10,4 +10,9 @@ users.prototype.register = async function register() {
     this.users = await usersModel.create(this.body);
 };
 
+users.findUsers = async () => {
+    const usuarios = await usersModel.find();
+    return usuarios;
+};
+
 module.exports = users;

@@ -4,9 +4,9 @@ const { newUser } = require('./Controllers/userController');
 const { newProduct, showProduct, uploadImage } = require('./Controllers/productsController');
 const { newBuy } = require('./Controllers/cartController');
 const { upload } = require('./Middlewares/upload');
-const { userAuth } = require('./Middlewares/userAuth');
+const { userAuth, verifyUser } = require('./Middlewares/userAuth');
 
-route.post('/users', userAuth, newUser);
+route.post('/users', userAuth, verifyUser, newUser);
 route.post('/products', newProduct);
 route.put('/products/:id', upload, uploadImage)
 route.get('/products', showProduct);
