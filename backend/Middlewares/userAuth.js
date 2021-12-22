@@ -1,4 +1,6 @@
 const Users = require('../Services/usersService');
+const jwt = require('jsonwebtoken');
+const { JWT_SECRET } = require('../Services/key');
 
 const userAuth = (_request, response, next) => {
     const { email } = _request.body;
@@ -40,14 +42,24 @@ const loginPasswordAuth = async (req, res, next) => {
     const { email } = req.body;
     const { password } = req.body;
     const users = await Users.findUsers();
-    console.log(users)
     const usersNames = users.filter((user) => user.email === email);
-    console.log(usersNames)
-    console.log(email)
 if (usersNames.length < 1 || usersNames[0].password !== password) {
     return res.status(401).json({ message: 'usuario inexistente ou senha incorreta' });
 } 
 next();
 };
 
-module.exports = { userAuth, verifyUser, loginAuth, loginPasswordAuth };
+const tokenAuth = async (req, res, next) => {
+    try {
+    const token = req.headers.authorization;
+    const payload = jwt.verify(token, JWT_SECRET);
+    if (!token || !payload) {
+        return res.status(401).json({ message: 'Nenhum usuario logado' });
+    } next();
+} catch (e) {
+    console.log(e);
+    return res.status(401).json({ message: 'Nenhum usuario logado' });
+}
+};
+
+module.exports = { userAuth, verifyUser, loginAuth, loginPasswordAuth, tokenAuth };

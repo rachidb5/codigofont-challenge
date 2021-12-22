@@ -8,7 +8,6 @@ function Header () {
   const { menu, setMenu }= useContext(Context);
   function menuDropper() {
     setMenu(!menu);
-    console.log(menu)
   }
     return (
       <nav className="navbar bg-dark navbar-expand-lg d-flex justify-content-between">

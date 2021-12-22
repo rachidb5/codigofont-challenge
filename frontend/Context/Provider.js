@@ -4,16 +4,18 @@ import Context from './Context';
 function Provider({ children }) {
     const [menu, setMenu] = useState(false);
     const [cartItens, setCartItens] = useState([]);
+    const [token, setToken] = useState('');
     const context = {
       menu,
       setMenu,
       cartItens,
-      setCartItens
+      setCartItens,
+      token,
+      setToken
     };
     return (
         <Context.Provider value={ context }>
           { children }
-          { console.log(cartItens)}
         </Context.Provider>
       );
 }

@@ -10,17 +10,13 @@ export default function GameCard(props) {
     const [exists, setExists] = useState('');
     function addToCart() {
         const verifyDouble = cartItens.filter((i) => i.name === name)
-        console.log(verifyDouble)
         if(verifyDouble.length > 0) {
             setExists('Produto já adicionado ao carrinho');
             return null;
         }
         let cart = cartItens;
-        console.log(cart)
         cart = [...cart, {name, price}]
-        console.log(cart)
         setCartItens(cart)
-        console.log(cartItens)
     }
     return (
     <div className="card" style={{ width: '18 rem' }}>

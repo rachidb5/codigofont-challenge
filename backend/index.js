@@ -25,6 +25,7 @@ const corsOpts = {
   
     allowedHeaders: [
       'Content-Type',
+      'authorization'
     ],
   };
   

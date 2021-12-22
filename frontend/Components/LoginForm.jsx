@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import Context from '../Context/Context';
 import axios from 'axios';
 import Input from './Subcomponents/Input';
 import Button from './Subcomponents/Button';
@@ -12,7 +13,7 @@ function LoginForm(props) {
     type: '',
     mensagem: ''
   })
-  const [passwordCheck, setPasswordCheck] = useState('');
+  const { token, setToken } = useContext(Context)
   const handleChange = ({ target: { name, value } }) => {
     setUser(prev => ({
       ...prev,
@@ -24,12 +25,12 @@ function LoginForm(props) {
      // const response = await axios.post('https://codigofont-chalenge-back.herokuapp.com/users', user);
      console.log(user) 
      await axios.post('http://localhost:3001/login', user).then((response) => {
-        console.log(response);
+        console.log(response.data.token);
+        setToken(response.data.token)
         setStatus({
           type: 'success',
           mensagem: 'Login efetuado com sucesso'
         })
-        setIsChecked(true)
       }).catch((err) => {
         if(err.response){
           console.log(err.response)

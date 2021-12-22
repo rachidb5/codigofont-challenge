@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Input from './Subcomponents/Input';
 import axios from 'axios';
 import Button from './Subcomponents/Button';
+import Context from '../Context/Context';
 
 function RegisteForm(props) {
+  const { token } = useContext(Context);
   const [game, setGame] = useState({
     productName: '',
     price: 0,
@@ -35,16 +37,21 @@ function RegisteForm(props) {
       setMessage('Inclua uma imagem do produto')
       return null;
     }
+    if(!token) {
+      setMessage('Nenhum usuario logado');
+      return null;
+    }
     try {
     //  const response = await axios.post('https://codigofont-chalenge-back.herokuapp.com/products', game);
     const headers = {
       'headers': {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'Authorization': token
       }
     }
     let data = new FormData();
     data.append('imgPath', imgPath)
-      const response = await axios.post('http://localhost:3001/products', game)
+      const response = await axios.post('http://localhost:3001/products', game, headers)
       console.log(response.data._id);
       const uploadedImg = await axios.put(`http://localhost:3001/products/${response.data._id}`,
       data,
