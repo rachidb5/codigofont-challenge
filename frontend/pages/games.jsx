@@ -17,6 +17,7 @@ export default function Games(data) {
           key={game.productName}
           name={game.productName}
           price={`R$ ${game.price}`}
+          quantity={`Quantidade: ${game.quantity}`}
           gameImg={`http://localhost:3001/files/${game._id}.${'jpeg' || 'png' || 'jpg'}`}/>)}
           </section>
       </div>
