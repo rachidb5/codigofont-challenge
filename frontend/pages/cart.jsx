@@ -7,7 +7,7 @@ import CartItem from '../Components/CartItem';
 import Button from '../Components/Subcomponents/Button';
 
 export default function Cart() {
-  const { menu, setMenu, cartItens}= useContext(Context);
+  const { menu, setMenu, cartItens, setCartItens }= useContext(Context);
   const handleSubmit = async e => {
     e.preventDefault();
     const cartObj = {
@@ -17,6 +17,7 @@ export default function Cart() {
      // const response = await axios.post('https://codigofont-chalenge-back.herokuapp.com/users', user);
       const response = await axios.post('http://localhost:3001/cart', cartObj);
       console.log(response);
+      setCartItens([])
     } catch (error) {
       console.log(error);
     }
