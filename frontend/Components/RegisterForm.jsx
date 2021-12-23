@@ -53,7 +53,7 @@ function RegisteForm(props) {
     data.append('imgPath', imgPath)
       const response = await axios.post('http://localhost:3001/products', game, headers)
       console.log(response.data._id);
-      const uploadedImg = await axios.put(`http://localhost:3001/products/${response.data._id}`,
+      const uploadedImg = await axios.put(`http://localhost:3001/image/${response.data._id}`,
       data,
       headers)
       console.log(uploadedImg)

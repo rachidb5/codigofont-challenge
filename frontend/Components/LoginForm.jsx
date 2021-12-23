@@ -14,6 +14,7 @@ function LoginForm(props) {
     mensagem: ''
   })
   const { token, setToken } = useContext(Context)
+  const { email, setEmail } = useContext(Context);
   const handleChange = ({ target: { name, value } }) => {
     setUser(prev => ({
       ...prev,
@@ -24,6 +25,7 @@ function LoginForm(props) {
     e.preventDefault();
      // const response = await axios.post('https://codigofont-chalenge-back.herokuapp.com/users', user);
      console.log(user) 
+     setEmail(user.email)
      await axios.post('http://localhost:3001/login', user).then((response) => {
         console.log(response.data.token);
         setToken(response.data.token)

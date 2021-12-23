@@ -16,8 +16,8 @@ export default function Games(data) {
           {games.map(game => <GameCard
           key={game.productName}
           name={game.productName}
-          price={`R$ ${game.price}`}
-          quantity={`Quantidade: ${game.quantity}`}
+          price={game.price}
+          quantity={game.quantity}
           gameImg={`http://localhost:3001/files/${game._id}.${'jpeg' || 'png' || 'jpg'}`}/>)}
           </section>
       </div>

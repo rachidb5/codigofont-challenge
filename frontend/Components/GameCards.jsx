@@ -15,7 +15,7 @@ export default function GameCard(props) {
             return null;
         }
         let cart = cartItens;
-        cart = [...cart, {name, price}]
+        cart = [...cart, {name, price, quantity}]
         setCartItens(cart)
     }
     return (
@@ -23,8 +23,8 @@ export default function GameCard(props) {
        <Image src={gameImg} className="card-img-top" alt="..." width={100} height={100}/>
         <div className="card-body">
             <h5 className="card-title">{name}</h5>
-            <p className="card-text">{price}</p>
-            <p className="card-text">{quantity}</p>
+            <p className="card-text">R$ {price}</p>
+            <p className="card-text">Quantidade: {quantity}</p>
             <p>{exists}</p>
             <Button
              type="button"

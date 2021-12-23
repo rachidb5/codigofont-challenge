@@ -3,10 +3,9 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
-const bodyParser = require('body-parser')
 require('dotenv').config();
 
-mongoose.connect(process.env.MONGO_DB_URL);
+mongoose.connect(`mongodb://localhost:27017/Gamefont`);
 
 const routes = require('./routes');
 

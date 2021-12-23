@@ -20,4 +20,9 @@ products.findProduct = async function findProduct(id) {
     return produto;
 };
 
+products.prototype.edit = async (id) => {
+    this.products = await productsModel.findByIdAndUpdate(id, this.body);
+};
+
+
 module.exports = products;

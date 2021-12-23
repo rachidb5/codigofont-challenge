@@ -5,13 +5,16 @@ function Provider({ children }) {
     const [menu, setMenu] = useState(false);
     const [cartItens, setCartItens] = useState([]);
     const [token, setToken] = useState('');
+    const [email, setEmail] = useState('')
     const context = {
       menu,
       setMenu,
       cartItens,
       setCartItens,
       token,
-      setToken
+      setToken,
+      email,
+      setEmail
     };
     return (
         <Context.Provider value={ context }>

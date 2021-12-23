@@ -33,3 +33,15 @@ exports.uploadImage = async (req, res) => {
         console.log(e);
       }
 };
+
+exports.atualizar = async (req, res) => {
+    try {
+        const product = new Products(req.body);
+        await product.edit(req.params.id);
+        return res.status(200).json(product.body);
+        } catch (err) {
+            console.log(err);
+            return res.status(400).json({ error: err });
+        }
+};
+
