@@ -11,8 +11,9 @@ export default function Cart() {
     type: '',
     mensagem: ''
   })
-  const subtractQuantity = async (id, newQ) => {
-    await axios.put(`http://localhost:3001/products/${id}`, newQ)
+  const subtractQuantity = async (id) => {
+    await axios.put(`http://localhost:3001/products/${id}`)
+    return null;
   }
   const handleSubmit = async e => {
     e.preventDefault();
@@ -48,6 +49,9 @@ export default function Cart() {
         }
       });
       setCartItens([]);
+      for(let i = 0; i < cartItens.length; i++){
+        await axios.put(`http://localhost:3001/products/${cartItens[i].id}`)
+      }
   };
   
     return (

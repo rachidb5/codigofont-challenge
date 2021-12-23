@@ -36,8 +36,14 @@ exports.uploadImage = async (req, res) => {
 
 exports.atualizar = async (req, res) => {
     try {
-        const product = new Products(req.body);
-        await product.edit(req.params.id);
+        let product = await Products.findProduct(req.params.id)
+        console.log(product)
+        const newProduct = {
+            productName: product.productName,
+            price: product.price,
+            quantity: product.quantity - 1
+        }
+        await newProduct.edit(req.params.id);
         return res.status(200).json(product.body);
         } catch (err) {
             console.log(err);

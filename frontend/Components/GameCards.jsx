@@ -5,17 +5,21 @@ import { useContext, useState } from 'react';
 import Image from 'next/image';
 
 export default function GameCard(props) {
-    const { name, price, quantity, gameImg} = props;
+    const { name, price, quantity, gameImg, id} = props;
     const { cartItens, setCartItens }= useContext(Context);
     const [exists, setExists] = useState('');
     function addToCart() {
+        if(quantity === 0) {
+            setExists('Produto fora de estoque');
+            return null;
+        }
         const verifyDouble = cartItens.filter((i) => i.name === name)
         if(verifyDouble.length > 0) {
             setExists('Produto já adicionado ao carrinho');
             return null;
         }
         let cart = cartItens;
-        cart = [...cart, {name, price, quantity}]
+        cart = [...cart, {name, price, quantity, id}]
         setCartItens(cart)
     }
     return (

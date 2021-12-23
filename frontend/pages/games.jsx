@@ -13,12 +13,13 @@ export default function Games(data) {
       <div className="bg-dark bg">
         { menu ? <DropdownMenu /> : null}
           <section className="gallery white d-flex justify-content-evenly">
-          {games.map(game => <GameCard
-          key={game.productName}
-          name={game.productName}
-          price={game.price}
-          quantity={game.quantity}
-          gameImg={`http://localhost:3001/files/${game._id}.${'jpeg' || 'png' || 'jpg'}`}/>)}
+            {games.map(game => <GameCard
+            key={game.productName}
+            name={game.productName}
+            price={game.price}
+            quantity={game.quantity}
+            id={game._id}
+            gameImg={`http://localhost:3001/files/${game._id}.${'jpeg' || 'png' || 'jpg'}`}/>)}
           </section>
       </div>
     )
