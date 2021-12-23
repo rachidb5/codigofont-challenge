@@ -11,8 +11,8 @@ export default function Cart() {
     type: '',
     mensagem: ''
   })
-  const subtractQuantity = async (id) => {
-    await axios.put(`http://localhost:3001/products/${id}`)
+  const subtractQuantity = async (id, updatedQuantity) => {
+    await axios.put(`http://localhost:3001/products/${id}`, updatedQuantity)
     return null;
   }
   const handleSubmit = async e => {
@@ -29,12 +29,21 @@ export default function Cart() {
       }
      // const response = await axios.post('https://codigofont-chalenge-back.herokuapp.com/users', user);
      console.log(cartItens)
-     await axios.post('http://localhost:3001/cart', cartObj, headers).then((response) => {
+     await axios.post('http://localhost:3001/cart', cartObj, headers).then(async (response) => {
         console.log(response);
         setStatus({
           type: 'success',
           mensagem: 'Compra realizada com sucesso'
         })
+        for(let i = 0; i < cartItens.length; i++){
+          const productUpdated = {
+            productName: cartItens[i].name,
+            price: cartItens[i].price,
+            quantity: cartItens[i].quantity - 1
+          }
+           await axios.put(`http://localhost:3001/products/${cartItens[i].id}`, productUpdated)
+         }
+        setCartItens([]);
       }).catch((err) => {
         if(err.response){
           setStatus({
@@ -48,10 +57,16 @@ export default function Cart() {
           })
         }
       });
-      setCartItens([]);
-      for(let i = 0; i < cartItens.length; i++){
-        await axios.put(`http://localhost:3001/products/${cartItens[i].id}`)
-      }
+      console.log(cartItens)
+      console.log(status)
+     /*for(let i = 0; i < cartItens.length; i++){
+       const productUpdated = {
+         productName: cartItens[i].name,
+         price: cartItens[i].price,
+         quantity: cartItens[i].quantity - 1
+       }
+        await axios.put(`http://localhost:3001/products/${cartItens[i].id}`, productUpdated)
+      }*/
   };
   
     return (

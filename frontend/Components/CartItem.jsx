@@ -1,4 +1,3 @@
-
 export default function CartItem(props) {
     return(
         <div className="bg-light">
