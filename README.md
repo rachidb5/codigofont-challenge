@@ -1,10 +1,10 @@
 #Backend
-cd backend
-npm install
-npm start
+<p>cd backend</p> <br></br>
+<p>npm install</p><br></br>
+<p>npm start</p><br></br>
 
 #Frontend
-cd frontend
-npm install
-npm run build
-npm start
+<p>cd frontend</p><br></br>
+<p>npm install</p><br></br>
+<p>npm run build</p><br></br>
+<p>npm start</p><br></br>
